@@ -1,0 +1,26 @@
+{
+  "name": "simpletodo",
+  "version": "1.0.0",
+  "description": "Simple todo app to practice vanilla JS and CRUD",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobPernell/SimpleTodo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobPernell/SimpleTodo/issues"
+  },
+  "homepage": "https://github.com/JacobPernell/SimpleTodo#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
