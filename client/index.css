@@ -1,0 +1,11 @@
+.todo-list {
+}
+
+.todo-container {
+  display: flex;
+}
+
+.todo-text {
+  margin-left: 10px;
+  list-style: none;
+}

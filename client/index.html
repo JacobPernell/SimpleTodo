@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>SimpleTodo</title>
   </head>
   <body>
     <h1>Simple Todo</h1>
     <form id="form">
-      <label for="new-todo">Enter a new todo item:</label>
-      <input type="text" name="new-todo" id="new-todo" />
-      <input type="submit" value="Add" class="add-todo" />
+      <label for="todo-input">Enter a new todo item:</label>
+      <input type="text" name="todo-input" id="todo-input" />
+      <label for="submit-todo"></label>
+      <input type="submit" value="Add" id="submit-todo" class="add-todo" />
     </form>
 
-    <ul id="testTodos"></ul>
+    <div id="todo-list"></div>
 
     <script src="/index.js"></script>
   </body>
