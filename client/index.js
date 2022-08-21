@@ -6,12 +6,20 @@ textInput.focus();
 form.addEventListener('submit', addNewTodo);
 
 function addNewTodo(e) {
+  fetch('/api/todos', {
+    method: 'POST',
+  })
+    .then(response => {
+      response.json();
+      console.log(response);
+    })
+    .then(data => console.log(data));
+
   if (textInput.value.trim() !== '') {
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('todo-container');
 
     const newTodo = document.createElement('li');
-    console.log(textInput.innerText);
     newTodo.classList.add('todo-text');
     newTodo.innerText = textInput.value;
 
