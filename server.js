@@ -10,6 +10,7 @@ connectDB();
 const app = express();
 const port = 3000;
 
+app.use(express.raw());
 app.use(express.static('client'));
 
 app
@@ -23,17 +24,17 @@ app
       res.status(500).json({ message: err.message });
     }
   })
-  .post((req, res) => {
+  .post(async (req, res) => {
     const todo = new Todo({
       text: req.body.text,
     });
     try {
-      const newTodo = todo.save();
+      const newTodo = await todo.save();
+      console.log(newTodo);
       res.status(201).json(newTodo);
     } catch (err) {
       res.status(400);
     }
-    console.log('POST to /');
   })
   .delete((req, res) => {
     console.log('DELETE to /');
