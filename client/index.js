@@ -1,6 +1,7 @@
 const form = document.getElementById('form');
 const todoList = document.getElementById('todo-list');
 const textInput = document.getElementById('todo-input');
+const submitButton = document.getElementById('submit-todo');
 
 textInput.focus();
 form.addEventListener('submit', addNewTodo);
@@ -11,7 +12,6 @@ function addNewTodo(e) {
   })
     .then(response => {
       response.json();
-      console.log(response);
     })
     .then(data => console.log(data));
 
@@ -19,9 +19,9 @@ function addNewTodo(e) {
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('todo-container');
 
-    const newTodo = document.createElement('li');
-    newTodo.classList.add('todo-text');
-    newTodo.innerText = textInput.value;
+    const newTodoItem = document.createElement('li');
+    newTodoItem.classList.add('todo-text');
+    newTodoItem.innerText = textInput.value;
 
     const deleteButton = document.createElement('button');
     deleteButton.innerText = 'X';
@@ -33,7 +33,7 @@ function addNewTodo(e) {
 
     todoContainer.appendChild(editButton);
     todoContainer.appendChild(deleteButton);
-    todoContainer.appendChild(newTodo);
+    todoContainer.appendChild(newTodoItem);
 
     todoList.appendChild(todoContainer);
 
