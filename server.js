@@ -10,7 +10,6 @@ connectDB();
 const app = express();
 const port = 3000;
 
-// app.use(express.raw());
 app.use(express.json());
 app.use(express.static('client'));
 
@@ -18,7 +17,6 @@ app
   .route('/api/todos')
   .get(async (req, res) => {
     try {
-      res.sendFile(path.join(__dirname + '/views/index.html'));
       const todos = await Todo.find();
       console.log('Todos:', todos);
       res.json(todos);
@@ -28,7 +26,7 @@ app
   })
   .post(async (req, res) => {
     const todo = new Todo({
-      text: res.json(req.body.text),
+      text: req.body.text,
     });
     try {
       const newTodo = await todo.save();
