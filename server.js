@@ -14,21 +14,21 @@ app.use(express.static('client'));
 
 app
   .route('/api/todos')
-  .get(async (req, res) => {
+  .get((req, res) => {
     try {
       res.sendFile(path.join(__dirname + '/views/index.html'));
-      const todos = await Todo.find();
+      const todos = Todo.find();
       res.json(todos);
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   })
-  .post(async (req, res) => {
+  .post((req, res) => {
     const todo = new Todo({
       text: req.body.text,
     });
     try {
-      const newTodo = await todo.save();
+      const newTodo = todo.save();
       res.status(201).json(newTodo);
     } catch (err) {
       res.status(400);
