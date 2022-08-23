@@ -6,6 +6,15 @@ const submitButton = document.getElementById('submit-todo');
 textInput.focus();
 form.addEventListener('submit', addNewTodo);
 
+(function getAllTodos() {
+  fetch('/api/todos', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+});
+
 function addNewTodo(e) {
   fetch('/api/todos', {
     method: 'POST',

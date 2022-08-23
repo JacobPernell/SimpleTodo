@@ -10,15 +10,17 @@ connectDB();
 const app = express();
 const port = 3000;
 
-app.use(express.raw());
+// app.use(express.raw());
+app.use(express.json());
 app.use(express.static('client'));
 
 app
   .route('/api/todos')
-  .get((req, res) => {
+  .get(async (req, res) => {
     try {
       res.sendFile(path.join(__dirname + '/views/index.html'));
-      const todos = Todo.find();
+      const todos = await Todo.find();
+      console.log('Todos:', todos);
       res.json(todos);
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -26,11 +28,10 @@ app
   })
   .post(async (req, res) => {
     const todo = new Todo({
-      text: req.body.text,
+      text: res.json(req.body.text),
     });
     try {
       const newTodo = await todo.save();
-      console.log(newTodo);
       res.status(201).json(newTodo);
     } catch (err) {
       res.status(400);
