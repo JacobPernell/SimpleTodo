@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConnect');
 const Todo = require('./models/todo');
-const { updateOne } = require('./models/todo');
 
 connectDB();
 
@@ -34,17 +33,24 @@ app
       res.status(400);
     }
   })
-  .delete((req, res) => {
-    console.log('DELETE to /');
+  .delete(async (req, res) => {
+    try {
+      await Todo.deleteOne({ _id: req.body._id }).then(result => {
+        res.json(result);
+      });
+    } catch (err) {
+      console.log('Error with delete:', err);
+    }
   })
-  .patch((req, res) => {
-    console.log('PATCH to /');
-    console.log(req.body);
-
-    if (req.params._id != null) {
-      updateOne({ _id: req.params._id }, { $set: { text: req.body.text } })
-        .then(result => json(result))
-        .catch(err => console.log('Error with patch:', err));
+  .patch(async (req, res) => {
+    try {
+      await Todo.updateOne({ _id: req.body._id }, { $set: { text: req.body.text } }).then(
+        result => {
+          res.json(result);
+        }
+      );
+    } catch (err) {
+      console.log('Error with patch:', err);
     }
   });
 

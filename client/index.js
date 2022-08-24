@@ -45,11 +45,15 @@ function postTodoItem(e) {
 }
 
 function editTodoItem(e) {
-  let selectedItem = e.target.nextSibling.nextSibling;
+  let selectedElementId = e.target.parentElement.dataset.id;
+  let selectedItemText = e.target.nextSibling.nextSibling;
 
-  const editedText = prompt(`Edit text from ${selectedItem.innerText} to:`, selectedItem.innerText);
+  const editedText = prompt(
+    `Edit text from ${selectedItemText.innerText} to:`,
+    selectedItemText.innerText
+  );
   if (editedText.trim() != '') {
-    selectedItem.innerText = editedText;
+    selectedItemText.innerText = editedText;
   }
 
   fetch('/api/todos', {
@@ -57,15 +61,31 @@ function editTodoItem(e) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ _id: selectedItem.dataset.id }),
+    body: JSON.stringify({ _id: selectedElementId, text: editedText }),
   })
-    .then(response => response.json())
+    .then(response => {
+      response.json();
+    })
     .then(data => console.log('Success:', data))
     .catch(error => console.error('Error:', error));
 }
 
 function deleteTodoItem(e) {
+  let selectedElementId = e.target.parentElement.dataset.id;
   todoList.removeChild(e.target.parentElement);
+
+  fetch('/api/todos', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ _id: selectedElementId }),
+  })
+    .then(response => {
+      response.json();
+    })
+    .then(data => console.log('Success:', data))
+    .catch(error => console.error('Error:', error));
 }
 
 function validateInput() {
