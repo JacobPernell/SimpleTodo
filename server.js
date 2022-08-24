@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConnect');
 const Todo = require('./models/todo');
+const { updateOne } = require('./models/todo');
 
 connectDB();
 
@@ -18,8 +18,7 @@ app
   .get(async (req, res) => {
     try {
       const todos = await Todo.find();
-      console.log('Todos:', todos);
-      res.json(todos);
+      res.send(todos);
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -40,6 +39,13 @@ app
   })
   .patch((req, res) => {
     console.log('PATCH to /');
+    console.log(req.body);
+
+    if (req.params._id != null) {
+      updateOne({ _id: req.params._id }, { $set: { text: req.body.text } })
+        .then(result => json(result))
+        .catch(err => console.log('Error with patch:', err));
+    }
   });
 
 mongoose.connection.once('open', () => {
