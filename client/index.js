@@ -107,10 +107,12 @@ function createNewTodoHTML(todoText, todoId) {
   const deleteButton = document.createElement('button');
   deleteButton.innerText = 'X';
   deleteButton.addEventListener('click', deleteTodoItem);
+  deleteButton.classList.add('delete-button');
 
   const editButton = document.createElement('button');
   editButton.innerText = 'Edit';
   editButton.addEventListener('click', editTodoItem);
+  editButton.classList.add('edit-button');
 
   todoContainer.appendChild(editButton);
   todoContainer.appendChild(deleteButton);

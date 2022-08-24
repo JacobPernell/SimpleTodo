@@ -1,8 +1,43 @@
-.todo-list {
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.edit-button {
+  border: none;
+  padding: 5px 10px;
+  margin-right: 3px;
+  color: white;
+  background-color: #3c6cac;
+  border-radius: 4px;
+  transition: all linear 0.2s;
+}
+.edit-button:hover {
+  cursor: pointer;
+  background-color: #08264d;
+}
+
+.delete-button {
+  border: none;
+  padding: 5px 10px;
+  margin-right: 3px;
+  color: white;
+  background-color: #be0000;
+  border-radius: 4px;
+  transition: all linear 0.2s;
+}
+.delete-button:hover {
+  cursor: pointer;
+  background-color: #890000;
+}
+
+#todo-list {
+  margin-top: 10px;
 }
 
 .todo-container {
   display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .todo-text {
