@@ -100,6 +100,8 @@ function createNewTodoHTML(todoText, todoId) {
     todoContainer.dataset.id = todoId;
   }
 
+  const fragment = new DocumentFragment();
+
   const newTodoItem = document.createElement('li');
   newTodoItem.classList.add('todo-text');
   newTodoItem.innerText = todoText;
@@ -118,7 +120,9 @@ function createNewTodoHTML(todoText, todoId) {
   todoContainer.appendChild(deleteButton);
   todoContainer.appendChild(newTodoItem);
 
-  todoList.appendChild(todoContainer);
+  fragment.appendChild(todoContainer);
+
+  todoList.appendChild(fragment);
 
   textInput.value = '';
   submitButton.disabled = true;
